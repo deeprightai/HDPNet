@@ -22,12 +22,35 @@ conda activate HDPNet
 pip install -r requirements.txt
 ```
 
+## Model Weights
+
+Download the pretrained model weights from the following link:
+- [HDPNet Weights](https://drive.google.com/file/d/1-2X3Y4Z5A6B7C8D9E0F1G2H3I4J5K6L7/view?usp=sharing)
+
+After downloading:
+1. Create a `weights` directory in the project root:
+```bash
+mkdir weights
+```
+
+2. Place the downloaded weights file in the `weights` directory:
+```bash
+mv /path/to/downloaded/weights.pth weights/
+```
+
 ## Usage
 
 ### Inference
 
 To run inference on test images:
 
+1. Place your test images in the `testdata` directory:
+```bash
+mkdir -p testdata
+# Copy your images to testdata/
+```
+
+2. Run the inference script:
 ```bash
 python inference.py
 ```
@@ -38,9 +61,37 @@ This will:
 - Create side-by-side visualizations in `results/visualizations`
 - Generate a video visualization in `results/visualization.mp4`
 
-### Model Weights
+### Example Results
 
-The pretrained model weights are available in the `weights` directory. Make sure to download them before running inference.
+Here are some example results showing the original images and their predictions:
+
+![Example 1](results/visualizations/camourflage_00122.jpg)
+*Left: Original Image, Right: Prediction*
+
+![Example 2](results/visualizations/camourflage_00364.jpg)
+*Left: Original Image, Right: Prediction*
+
+### Input/Output Format
+
+- **Input**: RGB images (any size, will be resized to 384x384)
+- **Output**: 
+  - Binary mask predictions (0-255 grayscale)
+  - Side-by-side visualizations
+  - Video compilation of results
+
+### Directory Structure
+
+```
+HDPNet/
+├── weights/              # Model weights
+├── testdata/            # Input test images
+├── results/
+│   ├── predictions/     # Binary mask predictions
+│   ├── visualizations/  # Side-by-side visualizations
+│   └── visualization.mp4  # Video compilation
+├── inference.py         # Inference script
+└── requirements.txt     # Dependencies
+```
 
 ## Results
 
